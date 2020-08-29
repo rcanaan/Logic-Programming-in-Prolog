@@ -1,0 +1,54 @@
+/*-----------ex 6 question 1---------------------*/
+grade(sara,97).
+grade(rivka,88).
+grade(naama,67).
+grade(rachel,81).
+
+
+nth(1, [H|_],H):-!.
+nth(N,[_|T],H):-%return the N item from the list
+	N>1, N1 is N-1,
+	nth(N1,T,H).
+
+milga(Num,Grade,L):-
+	findall(G/N, grade(N,G),Lst),%to know the grades and the names
+	sort(Lst,SL),%sort the grades from low to high
+	reverse(SL,RL),%reverse to high to low
+	write(RL),%write the list
+	nth(Num, RL,Grade/_),%return an an item - the num. this will be our limit grade
+	findall(N,(grade(N,G), G>=Grade),L).%we want to get in alist all the student that their grade is above the limit grade
+
+/*
+output:
+ milga(1,B,C).
+[97/sara,88/rivka,81/rachel,67/naama]
+B = 97,
+C = [sara].
+
+milga(3,B,C).
+[97/sara,88/rivka,81/rachel,67/naama]
+B = 81,
+C = [sara, rivka, rachel].
+
+
+*/
+
+
+
+/*-----------ex 6 question 2---------------------*/
+%gets num and return its dividors from high to low
+
+
+
+/*-----------ex 6 question 3---------------------*/
+%gets list and return in X the most common item and in Y the lowest.
+maxx([],0).%if the list is empty
+maxx([X],X).% if there is only 1 item - return it
+maxx([X|Xs],Res):-
+	maxx(Xs,Res1),%find the max between Xs and put it in Res1
+        Res is max(X,Res1).%Res = the max between Res1 and X
+
+minn([X],X).% if there is only 1 item - return it
+minn([X|Xs],Res):-
+	minn(Xs,Res1),%find the min between Xs and put it in Res1
+        Res is min(X,Res1).%Res = the min between Res1 and X

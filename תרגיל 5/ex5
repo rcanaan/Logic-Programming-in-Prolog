@@ -1,0 +1,3 @@
+firstlast([X],X,X):-!.
+firstlast([X|L],X,Y):-
+	first_last(L,_,Y).
